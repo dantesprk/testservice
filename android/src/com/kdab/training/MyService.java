@@ -1,18 +1,12 @@
-// java file android/src/com/kdab/training/MyService.java
 package com.kdab.training;
 
-import android.content.Context;
+import android.widget.Toast;
 import android.content.Intent;
-import org.qtproject.qt5.android.bindings.QtService;
-
+import android.content.Context;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.widget.Toast;
 import android.support.v4.app.NotificationCompat;
-import android.util.Log;
-import android.os.Handler;
-import java.util.concurrent.TimeUnit;
-import android.os.Looper;
+import org.qtproject.qt5.android.bindings.QtService;
 
 public class MyService extends QtService
 {
@@ -27,33 +21,28 @@ public class MyService extends QtService
     public void onCreate() {
         super.onCreate();
 
-        Toast.makeText(this, "Created", Toast.LENGTH_SHORT).show();
-
         NotificationManager notificationManager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
-
-        int notificationId = 1;
-        String channelId = "channel-01";
-        String channelName = "Channel Name";
-
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O)
         {
-            int importance = NotificationManager.IMPORTANCE_HIGH;
-            NotificationChannel mChannel = new NotificationChannel(channelId, channelName, importance);
-            notificationManager.createNotificationChannel(mChannel);
+            String channelId = "channel-01";
+            String channelName = "Channel Name";
+
+            NotificationChannel сhannel = new NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_HIGH);
+            notificationManager.createNotificationChannel(сhannel);
         }
 
-        NotificationCompat.Builder builder =
-                new NotificationCompat.Builder(this, "channel-01")
-                        .setSmallIcon(R.mipmap.ic_launcher)
-                        .setContentTitle("Title")
-                        .setContentText("Notification text");
-
+        NotificationCompat.Builder builder =new NotificationCompat.Builder(this, "channel-01")
+                                                .setSmallIcon(R.mipmap.ic_launcher)
+                                                .setContentTitle("Title")
+                                                .setContentText("Text");
 
         startForeground (456, builder.build());
+
+        Toast.makeText(this, "Created", Toast.LENGTH_SHORT).show();
     }
 
-    public int onStartCommand(Intent intent, int flags, int startId) {
+   public int onStartCommand(Intent intent, int flags, int startId) {
        return START_NOT_STICKY;
        //return super.onStartCommand(intent, flags, startId);
    }

@@ -1,9 +1,10 @@
+#include <QQmlContext>
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
-#include <QQmlContext>
+
+#include <QtAndroid>
 #include <QAndroidJniObject>
 #include <QAndroidJniEnvironment>
-#include <QtAndroid>
 
 int main(int argc, char *argv[])
 {
